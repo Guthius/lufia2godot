@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://24885wo27eup"]
+
+[ext_resource type="Texture2D" uid="uid://6j03dvcy85b7" path="res://Textures/Sprites/Objects/door1.png" id="1_weylr"]
+[ext_resource type="Script" path="res://Scenes/Objects/door.gd" id="2_ewuva"]
+
+[sub_resource type="Animation" id="Animation_21dyy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jjqvv"]
+resource_name = "open_door"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhl2e"]
+_data = {
+"RESET": SubResource("Animation_21dyy"),
+"open_door": SubResource("Animation_jjqvv")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0we0"]
+size = Vector2(28, 28)
+
+[node name="Door" type="Sprite2D"]
+z_index = 4
+texture_filter = 1
+position = Vector2(16, 16)
+texture = ExtResource("1_weylr")
+offset = Vector2(1.45519e-11, 8)
+hframes = 3
+script = ExtResource("2_ewuva")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uhl2e")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_i0we0")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

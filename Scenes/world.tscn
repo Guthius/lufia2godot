@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cskvws5m2dphx"]
+
+[ext_resource type="Script" path="res://Scenes/world.gd" id="1_bhxdw"]
+[ext_resource type="PackedScene" uid="uid://imdfavmxgm7g" path="res://Scenes/Actors/player.tscn" id="1_e7iga"]
+[ext_resource type="AudioStream" uid="uid://b0y00o44y25in" path="res://Audio/Music/bgm_town.mp3" id="3_6ra5n"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_bhxdw")
+start_map = "res://Scenes/Maps/Elcid/elcid.tscn"
+start_x = 1120.0
+start_y = 896.0
+
+[node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Map" instance=ExtResource("1_e7iga")]
+visible = false
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_6ra5n")
+volume_db = -40.0
+parameters/looping = false
+
+[connection signal="change_map" from="Map/Player" to="." method="_on_player_change_map"]

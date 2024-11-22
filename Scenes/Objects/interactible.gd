@@ -1,0 +1,1 @@
+class_name Interactible extends StaticBody2D

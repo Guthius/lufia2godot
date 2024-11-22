@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgoe1uvo7xh1j"]
+
+[ext_resource type="Script" path="res://Scenes/Triggers/warp.gd" id="1_v2k12"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ue0wc"]
+size = Vector2(28, 28)
+
+[node name="Warp" type="Area2D"]
+z_index = 200
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_v2k12")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_ue0wc")
+debug_color = Color(0.255176, 0.628882, 0.254309, 0.42)

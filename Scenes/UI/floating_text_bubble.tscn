@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4tfgy4nc3t5d"]
+
+[ext_resource type="Script" path="res://Scenes/UI/floating_text_bubble.gd" id="1_lm7wj"]
+[ext_resource type="Texture2D" uid="uid://bbvuqjyq0xmvc" path="res://Textures/UI/speech_bubble.png" id="2_7h6nx"]
+[ext_resource type="FontFile" uid="uid://fliua8kxxs00" path="res://Textures/UI/speech_font.png" id="3_wqm7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o51rs"]
+atlas = ExtResource("2_7h6nx")
+
+[sub_resource type="Theme" id="Theme_8jky2"]
+default_font = ExtResource("3_wqm7s")
+default_font_size = 32
+
+[node name="FloatingTextBubble" type="CanvasLayer"]
+script = ExtResource("1_lm7wj")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="MarginContainer" parent="Control"]
+layout_mode = 1
+offset_right = 192.0
+offset_bottom = 64.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/Container"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_o51rs")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Control/Container/NinePatchRect"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 176.0
+offset_bottom = 48.0
+theme = SubResource("Theme_8jky2")
+text = "ABC
+"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
